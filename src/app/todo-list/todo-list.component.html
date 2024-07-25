@@ -1,0 +1,43 @@
+<div class="todo">
+  <h2 class="text">Todo List</h2>
+</div>
+<div class="inputadd">
+  <input [(ngModel)]="newTodo" placeholder="Add A New Todo" />
+  <button (click)="addTodo()">Add</button>
+</div>
+<div class="addedtodo">
+  <ul>
+    <li *ngFor="let todo of todos; let i = index" class="todo-item">
+      <span *ngIf="editingIndex !== i" class="todo-text">{{ todo.text }}</span>
+      <input
+        *ngIf="editingIndex === i"
+        [(ngModel)]="editedTodo"
+        class="todo-input"
+      />
+      <div class="button-group">
+        <button
+          *ngIf="editingIndex === i"
+          (click)="updateTodo()"
+          class="btn btn-success"
+        >
+          Update
+        </button>
+        <button
+          *ngIf="editingIndex === i"
+          (click)="cancelEdit()"
+          class="btn btn-info"
+        >
+          Cancel
+        </button>
+        <button
+          *ngIf="editingIndex !== i"
+          (click)="editTodo(i)"
+          class="btn btn-primary"
+        >
+          Edit
+        </button>
+        <button (click)="removeTodo(i)" class="btn btn-danger">Remove</button>
+      </div>
+    </li>
+  </ul>
+</div>
